@@ -1,25 +1,21 @@
 import yt_dlp
-
 try:
-    type_choice = input('Vid Or PlayList? Answer by: v/p |: ').strip().lower()
-
-    if type_choice == 'v':
-        url = input("Please Enter The Video Url: ").strip()
-        yt_dlp.YoutubeDL({'format': 'bestvideo+bestaudio/best'}).download([url])
-    
-    elif type_choice == 'p':
-        purl = input("Please Enter The PlayList Url: ").strip()
-        options = {
-            'format': 'bestvideo+bestaudio/best',
-            'noplaylist': False,
+    type= input('PlayList Or Video? p/v|: ').strip().lower()
+    if type == 'v':
+        vid_url = input('Please Enter The URL: ').strip()
+        vid_attr={
+            'format':'bestvideo+bestaudio/best'
+        }
+        yt_dlp.YoutubeDL(vid_attr).download(vid_url)
+    elif type == 'p':
+        Play_url = input('Please Enter The URL: ').strip()
+        Play_attr={
+            'format':'bestvideo+bestaudio/best',
+            'noplaylist':'false',
             'outtmpl': '%(playlist_index)s - %(title)s.%(ext)s'
         }
-        
-        yt_dlp.YoutubeDL(options).download([purl])
-        print("✅ Playlist downloaded successfully!")
-    
+        yt_dlp.YoutubeDL(Play_attr).download(Play_url)
     else:
-        print("❌ Invalid choice! Please enter 'v' for video or 'p' for playlist.")
-
+        print('Please Choose (video)-->"v" or (PlayList)-->"p')
 except Exception as e:
-    print(f"❌ Error: {e}")
+    print(f'Error: {e}')
